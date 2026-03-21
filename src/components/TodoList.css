@@ -4,8 +4,9 @@
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: #f4f6f7;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 .todo-form input[type="text"] {
@@ -22,8 +23,9 @@
 
 .todo-assign-label {
   font-size: 0.85rem;
-  color: #666;
+  color: #555;
   margin-bottom: 0.25rem;
+  font-weight: 600;
 }
 
 .todo-assign-list {
@@ -38,10 +40,11 @@
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.85rem;
   cursor: pointer;
+  color: #333;
 }
 
 .todo-form button {
@@ -52,6 +55,7 @@
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .todo-form button:hover:not(:disabled) {
@@ -59,7 +63,8 @@
 }
 
 .todo-form button:disabled {
-  background: #bdc3c7;
+  background: #95a5a6;
+  color: #ecf0f1;
   cursor: not-allowed;
 }
 
@@ -70,28 +75,31 @@
 }
 
 .todo-item {
-  padding: 1rem;
-  border: 1px solid #ecf0f1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
   border-radius: 8px;
   background: white;
 }
 
 .todo-item.done {
-  opacity: 0.6;
+  opacity: 0.7;
+  background: #f9f9f9;
 }
 
 .todo-item.done .todo-text {
   text-decoration: line-through;
+  color: #888;
 }
 
 .todo-text {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  color: #2c3e50;
 }
 
 .todo-meta {
   font-size: 0.8rem;
-  color: #999;
+  color: #777;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -105,11 +113,12 @@
 }
 
 .todo-assigned-tag {
-  background: #eaf2f8;
-  color: #2980b9;
+  background: #d4e6f1;
+  color: #1a5276;
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .todo-done-btn {
@@ -130,5 +139,16 @@
 .todo-done-info {
   margin-top: 0.25rem;
   font-size: 0.8rem;
-  color: #27ae60;
+  color: #1e8449;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .todo-form {
+    padding: 0.75rem;
+  }
+
+  .todo-item {
+    padding: 0.6rem;
+  }
 }

@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 500;
+  padding: 1rem;
 }
 
 .date-popup {
@@ -16,7 +17,7 @@
   border-radius: 12px;
   padding: 1.5rem;
   max-width: 350px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -42,13 +43,9 @@
   transition: all 0.15s;
 }
 
-.date-popup-options button:hover {
-  border-color: #3498db;
-}
-
 .date-popup-options button.pasuje {
   border-color: #27ae60;
-  color: #27ae60;
+  color: #1e8449;
 }
 
 .date-popup-options button.pasuje:hover {
@@ -57,29 +54,29 @@
 }
 
 .date-popup-options button.nie-pasuje {
-  border-color: #e74c3c;
-  color: #e74c3c;
+  border-color: #c0392b;
+  color: #922b21;
 }
 
 .date-popup-options button.nie-pasuje:hover {
-  background: #e74c3c;
+  background: #c0392b;
   color: white;
 }
 
 .date-popup-options button.inne {
-  border-color: #f39c12;
-  color: #f39c12;
+  border-color: #d68910;
+  color: #7d6608;
 }
 
 .date-popup-options button.inne:hover {
-  background: #f39c12;
+  background: #d68910;
   color: white;
 }
 
 .event-name-input {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid #f39c12;
+  border: 2px solid #d68910;
   border-radius: 6px;
   font-size: 0.9rem;
   margin-top: 0.5rem;
@@ -93,9 +90,10 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  color: #666;
+  color: #555;
+  font-size: 0.9rem;
 }
 
 .date-popup .cancel-btn:hover {
-  background: #ddd;
+  background: #d5dbdb;
 }

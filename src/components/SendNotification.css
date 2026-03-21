@@ -3,8 +3,9 @@
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: #f4f6f7;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 .send-notif-form textarea {
@@ -24,7 +25,7 @@
 
 .send-notif-target {
   font-size: 0.85rem;
-  color: #666;
+  color: #555;
 }
 
 .send-notif-users {
@@ -40,10 +41,11 @@
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.85rem;
   cursor: pointer;
+  color: #333;
 }
 
 .send-all-label {
@@ -53,23 +55,33 @@
   font-size: 0.85rem;
   margin-bottom: 0.25rem;
   cursor: pointer;
+  color: #333;
+  font-weight: 600;
 }
 
 .send-notif-form button[type="submit"] {
   padding: 0.75rem;
-  background: #8e44ad;
+  background: #6c3483;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .send-notif-form button[type="submit"]:hover:not(:disabled) {
-  background: #7d3c98;
+  background: #5b2c6f;
 }
 
 .send-notif-form button[type="submit"]:disabled {
-  background: #bdc3c7;
+  background: #95a5a6;
+  color: #ecf0f1;
   cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .send-notif-form {
+    padding: 0.75rem;
+  }
 }

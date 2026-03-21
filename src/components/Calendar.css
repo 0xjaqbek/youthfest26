@@ -2,30 +2,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .calendar-nav button {
-  padding: 0.5rem 1rem;
-  background: #3498db;
+  padding: 0.5rem 0.75rem;
+  background: #2980b9;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .calendar-nav button:hover:not(:disabled) {
-  background: #2980b9;
+  background: #2471a3;
 }
 
 .calendar-nav button:disabled {
-  background: #bdc3c7;
+  background: #95a5a6;
+  color: #ecf0f1;
   cursor: not-allowed;
 }
 
 .calendar-nav .month-label {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #2c3e50;
 }
@@ -33,22 +34,26 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 1px;
+  background: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .calendar-grid .day-header {
   text-align: center;
   font-weight: bold;
-  padding: 0.5rem;
-  background: #ecf0f1;
-  font-size: 0.8rem;
-  color: #666;
+  padding: 0.4rem 0.2rem;
+  background: #34495e;
+  font-size: 0.75rem;
+  color: white;
 }
 
 .calendar-grid .day-cell {
-  min-height: 60px;
-  border: 1px solid #ecf0f1;
-  padding: 4px;
+  min-height: 48px;
+  background: white;
+  padding: 3px;
   cursor: pointer;
   position: relative;
   transition: background 0.15s;
@@ -60,16 +65,15 @@
 
 .calendar-grid .day-cell.empty {
   cursor: default;
-  background: transparent;
-  border: none;
+  background: #f8f8f8;
 }
 
 .calendar-grid .day-cell.empty:hover {
-  background: transparent;
+  background: #f8f8f8;
 }
 
 .day-number {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: bold;
   color: #333;
 }
@@ -82,8 +86,8 @@
 }
 
 .day-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
 }
 
@@ -92,27 +96,31 @@
 }
 
 .day-dot.nie-pasuje {
-  background: #e74c3c;
+  background: #c0392b;
 }
 
 .day-dot.inne {
-  background: #f39c12;
+  background: #d68910;
 }
 
 .day-overflow {
-  font-size: 0.65rem;
-  color: #999;
+  font-size: 0.6rem;
+  color: #777;
+  font-weight: bold;
 }
 
 .date-summary {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f9f9f9;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #f4f6f7;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 .date-summary h4 {
   margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 0.95rem;
 }
 
 .date-summary-item {
@@ -120,24 +128,62 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.25rem 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.date-summary-item strong {
+  color: #2c3e50;
 }
 
 .date-summary-item .status-badge {
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
-  color: white;
   font-size: 0.75rem;
+  font-weight: bold;
 }
 
 .status-badge.pasuje {
   background: #27ae60;
+  color: white;
 }
 
 .status-badge.nie-pasuje {
-  background: #e74c3c;
+  background: #c0392b;
+  color: white;
 }
 
 .status-badge.inne {
-  background: #f39c12;
+  background: #7d6608;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .calendar-nav button {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .calendar-nav .month-label {
+    font-size: 0.95rem;
+  }
+
+  .calendar-grid .day-cell {
+    min-height: 40px;
+    padding: 2px;
+  }
+
+  .calendar-grid .day-header {
+    padding: 0.3rem 0.1rem;
+    font-size: 0.65rem;
+  }
+
+  .day-number {
+    font-size: 0.7rem;
+  }
+
+  .day-dot {
+    width: 5px;
+    height: 5px;
+  }
 }
