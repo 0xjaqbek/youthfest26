@@ -1,1 +1,25 @@
-{\n  "name": "youthfest26",\n  "version": "1.0.0",\n  "description": "A project for Youthfest 26",\n  "main": "index.js",\n  "scripts": {\n    "test": "echo 'Error: no test specified' && exit 1"\n  },\n  "dependencies": {\n    "react": "^17.0.2",\n    "firebase": "^9.1.2",\n    "react-calendar": "^3.3.0"\n  },\n  "devDependencies": {},\n  "repository": {\n    "type": "git",\n    "url": "git+https://github.com/0xjaqbek/youthfest26.git"\n  },\n  "keywords": [],\n  "author": "0xjaqbek",\n  "license": "ISC"\n}
+{
+  "name": "youthfest26",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://0xjaqbek.github.io/youthfest26",
+  "dependencies": {
+    "firebase": "^10.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  }
+}
