@@ -109,55 +109,6 @@
   font-weight: bold;
 }
 
-.date-summary {
-  margin-top: 0.75rem;
-  padding: 0.75rem;
-  background: #f4f6f7;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.date-summary h4 {
-  margin-bottom: 0.5rem;
-  color: #2c3e50;
-  font-size: 0.95rem;
-}
-
-.date-summary-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0;
-  font-size: 0.85rem;
-  flex-wrap: wrap;
-}
-
-.date-summary-item strong {
-  color: #2c3e50;
-}
-
-.date-summary-item .status-badge {
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
-.status-badge.pasuje {
-  background: #27ae60;
-  color: white;
-}
-
-.status-badge.nie-pasuje {
-  background: #c0392b;
-  color: white;
-}
-
-.status-badge.inne {
-  background: #7d6608;
-  color: white;
-}
-
 @media (max-width: 600px) {
   .calendar-nav button {
     padding: 0.4rem 0.5rem;

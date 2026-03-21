@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DatePopup.css';
 
-function DatePopup({ dateStr, currentStatus, onSave, onClose }) {
+function DatePopup({ dateStr, currentStatus, dayEntries, onSave, onClose }) {
   const [eventName, setEventName] = useState(
     currentStatus?.status === 'inne wydarzenie' ? currentStatus.eventName || '' : ''
   );
@@ -21,10 +21,38 @@ function DatePopup({ dateStr, currentStatus, onSave, onClose }) {
     }
   };
 
+  const entries = dayEntries ? Object.entries(dayEntries) : [];
+
   return (
     <div className="date-popup-overlay" onClick={onClose}>
       <div className="date-popup" onClick={(e) => e.stopPropagation()}>
         <h3>{dateStr}</h3>
+
+        {entries.length > 0 && (
+          <div className="date-popup-entries">
+            <div className="date-popup-entries-title">Wpisy:</div>
+            {entries.map(([entryUid, entry]) => {
+              const status = entry.status || entry;
+              const cls = status === 'pasuje' ? 'pasuje' :
+                          status === 'nie pasuje' ? 'nie-pasuje' : 'inne';
+              return (
+                <div key={entryUid} className="date-popup-entry">
+                  <strong>{entry.nickname || entryUid}</strong>
+                  <span className={`status-badge ${cls}`}>{status}</span>
+                  {entry.eventName && <span className="entry-event-name">— {entry.eventName}</span>}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {currentStatus && (
+          <div className="date-popup-your-status">
+            Twój obecny wpis: <strong>{currentStatus.status}</strong>
+            {currentStatus.eventName && <span> — {currentStatus.eventName}</span>}
+          </div>
+        )}
+
         <div className="date-popup-options">
           <button className="pasuje" onClick={() => handleSelect('pasuje')}>
             Pasuje
@@ -47,8 +75,7 @@ function DatePopup({ dateStr, currentStatus, onSave, onClose }) {
               autoFocus
             />
             <button
-              className="pasuje"
-              style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', border: '2px solid #27ae60', borderRadius: '8px', background: '#27ae60', color: 'white', cursor: 'pointer', fontSize: '0.95rem' }}
+              className="save-event-btn"
               onClick={handleSaveEvent}
               disabled={!eventName.trim()}
             >

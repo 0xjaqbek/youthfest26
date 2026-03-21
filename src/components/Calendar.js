@@ -124,27 +124,10 @@ function Calendar({ uid, nickname }) {
         <DatePopup
           dateStr={selectedDate}
           currentStatus={currentStatus}
+          dayEntries={calendarData[selectedDate] || null}
           onSave={handleSave}
           onClose={() => setSelectedDate(null)}
         />
-      )}
-
-      {selectedDate && calendarData[selectedDate] && (
-        <div className="date-summary">
-          <h4>Wpisy na {selectedDate}:</h4>
-          {Object.entries(calendarData[selectedDate]).map(([entryUid, entry]) => {
-            const status = entry.status || entry;
-            const cls = status === 'pasuje' ? 'pasuje' :
-                        status === 'nie pasuje' ? 'nie-pasuje' : 'inne';
-            return (
-              <div key={entryUid} className="date-summary-item">
-                <strong>{entry.nickname || entryUid}</strong>
-                <span className={`status-badge ${cls}`}>{status}</span>
-                {entry.eventName && <span>— {entry.eventName}</span>}
-              </div>
-            );
-          })}
-        </div>
       )}
     </div>
   );
