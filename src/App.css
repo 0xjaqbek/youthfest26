@@ -1,0 +1,29 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.calendar-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.todo {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.todo-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.todo-description {
+    color: #666;
+}
