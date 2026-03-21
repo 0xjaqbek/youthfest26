@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/youthfest26/static/css/main.63c92426.css",
+    "main.css": "/youthfest26/static/css/main.ea95d054.css",
     "main.js": "/youthfest26/static/js/main.aa2ffbe3.js",
     "index.html": "/youthfest26/index.html",
-    "main.63c92426.css.map": "/youthfest26/static/css/main.63c92426.css.map",
+    "main.ea95d054.css.map": "/youthfest26/static/css/main.ea95d054.css.map",
     "main.aa2ffbe3.js.map": "/youthfest26/static/js/main.aa2ffbe3.js.map"
   },
   "entrypoints": [
-    "static/css/main.63c92426.css",
+    "static/css/main.ea95d054.css",
     "static/js/main.aa2ffbe3.js"
   ]
 }
