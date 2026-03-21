@@ -8,6 +8,7 @@ import Calendar from './components/Calendar';
 import TodoList from './components/TodoList';
 import NotificationBell from './components/NotificationBell';
 import SendNotification from './components/SendNotification';
+import Timetable from './components/Timetable';
 import './App.css';
 
 function App() {
@@ -106,6 +107,10 @@ function App() {
         <section className="section">
           <h2>Powiadomienia</h2>
           <SendNotification uid={user.uid} nickname={nickname} />
+        </section>
+        <section className="section">
+          <h2>Harmonogram YouthFest 2026</h2>
+          <Timetable uid={user.uid} nickname={nickname} />
         </section>
       </main>
     </div>

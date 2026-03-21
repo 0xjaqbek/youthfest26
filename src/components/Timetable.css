@@ -1,0 +1,122 @@
+.timetable-grid {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.timetable-header {
+  display: flex;
+  background: #34495e;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.timetable-row {
+  display: flex;
+  border-bottom: 1px solid #ecf0f1;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.timetable-row:last-child {
+  border-bottom: none;
+}
+
+.timetable-row:hover {
+  background: #eaf2f8;
+}
+
+.timetable-row.hour {
+  border-bottom-color: #ccc;
+}
+
+.timetable-row.filled {
+  background: #eafaf1;
+}
+
+.timetable-row.filled:hover {
+  background: #d5f5e3;
+}
+
+.tt-col-time {
+  width: 80px;
+  min-width: 80px;
+  padding: 0.5rem 0.6rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #2c3e50;
+  border-right: 1px solid #ecf0f1;
+  display: flex;
+  align-items: center;
+}
+
+.timetable-header .tt-col-time {
+  color: white;
+  border-right-color: rgba(255, 255, 255, 0.2);
+}
+
+.tt-col-event {
+  flex: 1;
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+}
+
+.tt-empty {
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.tt-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tt-entry-text {
+  font-size: 0.9rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.tt-entry-meta {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.tt-edit-input {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.tt-hint {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .tt-col-time {
+    width: 60px;
+    min-width: 60px;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .tt-col-event {
+    padding: 0.4rem;
+  }
+
+  .tt-entry-text {
+    font-size: 0.85rem;
+  }
+}
