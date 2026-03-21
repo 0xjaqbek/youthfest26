@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/youthfest26/static/css/main.1345f789.css",
+    "main.js": "/youthfest26/static/js/main.9535883e.js",
+    "index.html": "/youthfest26/index.html",
+    "main.1345f789.css.map": "/youthfest26/static/css/main.1345f789.css.map",
+    "main.9535883e.js.map": "/youthfest26/static/js/main.9535883e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1345f789.css",
+    "static/js/main.9535883e.js"
+  ]
+}
