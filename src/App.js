@@ -5,6 +5,7 @@ import NicknamePrompt from './components/NicknamePrompt';
 import Calendar from './components/Calendar';
 import TodoList from './components/TodoList';
 import NotificationBell from './components/NotificationBell';
+import SendNotification from './components/SendNotification';
 import './App.css';
 
 function App() {
@@ -55,6 +56,10 @@ function App() {
         <section className="section">
           <h2>Lista zadań</h2>
           <TodoList nickname={nickname} />
+        </section>
+        <section className="section">
+          <h2>Powiadomienia</h2>
+          <SendNotification nickname={nickname} />
         </section>
       </main>
     </div>

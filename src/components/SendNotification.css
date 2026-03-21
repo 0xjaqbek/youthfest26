@@ -1,0 +1,75 @@
+.send-notif-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.send-notif-form textarea {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+  outline: none;
+}
+
+.send-notif-form textarea:focus {
+  border-color: #3498db;
+}
+
+.send-notif-target {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.send-notif-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.send-notif-users label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.send-all-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+.send-notif-form button[type="submit"] {
+  padding: 0.75rem;
+  background: #8e44ad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.send-notif-form button[type="submit"]:hover:not(:disabled) {
+  background: #7d3c98;
+}
+
+.send-notif-form button[type="submit"]:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
