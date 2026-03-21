@@ -3,11 +3,11 @@ import { ref, onValue, push, update } from 'firebase/database';
 import { db } from '../firebase';
 import './TodoList.css';
 
-function TodoList({ nickname }) {
+function TodoList({ uid, nickname }) {
   const [todos, setTodos] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]); // [{uid, nickname}]
   const [text, setText] = useState('');
-  const [assignedTo, setAssignedTo] = useState([]);
+  const [assignedTo, setAssignedTo] = useState([]); // UIDs
 
   useEffect(() => {
     const todosRef = ref(db, 'todos');
@@ -25,30 +25,43 @@ function TodoList({ nickname }) {
     const usersRef = ref(db, 'users');
     const unsub = onValue(usersRef, (snapshot) => {
       const data = snapshot.val() || {};
-      setUsers(Object.keys(data));
+      const list = Object.entries(data).map(([userUid, val]) => ({
+        uid: userUid,
+        nickname: val.nickname || userUid,
+      }));
+      setUsers(list);
     });
     return () => unsub();
   }, []);
+
+  const getNameForUid = (userUid) => {
+    const found = users.find((u) => u.uid === userUid);
+    return found ? found.nickname : userUid;
+  };
 
   const handleAdd = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
 
+    const assignedNames = assignedTo.map(getNameForUid);
+
     const newTodo = {
       text: text.trim(),
       assignedTo: assignedTo.length > 0 ? assignedTo : [],
-      addedBy: nickname,
+      assignedNames: assignedNames.length > 0 ? assignedNames : [],
+      addedBy: uid,
+      addedByName: nickname,
       createdAt: Date.now(),
       done: false,
       doneBy: null,
+      doneByName: null,
       doneAt: null,
     };
 
     push(ref(db, 'todos'), newTodo).then(() => {
-      // Create notifications for assigned users
       if (assignedTo.length > 0) {
-        assignedTo.forEach((user) => {
-          push(ref(db, `notifications/${user}`), {
+        assignedTo.forEach((userUid) => {
+          push(ref(db, `notifications/${userUid}`), {
             message: `Przypisano ci zadanie: ${newTodo.text}`,
             from: nickname,
             createdAt: Date.now(),
@@ -62,16 +75,17 @@ function TodoList({ nickname }) {
     setAssignedTo([]);
   };
 
-  const handleToggleAssign = (user) => {
+  const handleToggleAssign = (userUid) => {
     setAssignedTo((prev) =>
-      prev.includes(user) ? prev.filter((u) => u !== user) : [...prev, user]
+      prev.includes(userUid) ? prev.filter((u) => u !== userUid) : [...prev, userUid]
     );
   };
 
   const handleMarkDone = (todoId) => {
     update(ref(db, `todos/${todoId}`), {
       done: true,
-      doneBy: nickname,
+      doneBy: uid,
+      doneByName: nickname,
       doneAt: Date.now(),
     });
   };
@@ -99,14 +113,14 @@ function TodoList({ nickname }) {
         <div>
           <div className="todo-assign-label">Przypisz do:</div>
           <div className="todo-assign-list">
-            {users.map((user) => (
-              <label key={user}>
+            {users.map((u) => (
+              <label key={u.uid}>
                 <input
                   type="checkbox"
-                  checked={assignedTo.includes(user)}
-                  onChange={() => handleToggleAssign(user)}
+                  checked={assignedTo.includes(u.uid)}
+                  onChange={() => handleToggleAssign(u.uid)}
                 />
-                {user}
+                {u.nickname}
               </label>
             ))}
           </div>
@@ -120,20 +134,20 @@ function TodoList({ nickname }) {
         {todos.map((todo) => (
           <div key={todo.id} className={`todo-item ${todo.done ? 'done' : ''}`}>
             <div className="todo-text">{todo.text}</div>
-            {todo.assignedTo && todo.assignedTo.length > 0 && (
+            {todo.assignedNames && todo.assignedNames.length > 0 && (
               <div className="todo-assigned">
-                {todo.assignedTo.map((user) => (
-                  <span key={user} className="todo-assigned-tag">{user}</span>
+                {todo.assignedNames.map((name) => (
+                  <span key={name} className="todo-assigned-tag">{name}</span>
                 ))}
               </div>
             )}
             <div className="todo-meta">
-              <span>Dodał/a: {todo.addedBy}</span>
+              <span>Dodał/a: {todo.addedByName || todo.addedBy}</span>
               <span>{formatDate(todo.createdAt)}</span>
             </div>
             {todo.done ? (
               <div className="todo-done-info">
-                Zrobione przez {todo.doneBy} — {formatDate(todo.doneAt)}
+                Zrobione przez {todo.doneByName || todo.doneBy} — {formatDate(todo.doneAt)}
               </div>
             ) : (
               <button className="todo-done-btn" onClick={() => handleMarkDone(todo.id)}>

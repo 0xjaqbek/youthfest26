@@ -3,24 +3,28 @@ import { ref, onValue, push } from 'firebase/database';
 import { db } from '../firebase';
 import './SendNotification.css';
 
-function SendNotification({ nickname }) {
-  const [users, setUsers] = useState([]);
+function SendNotification({ uid, nickname }) {
+  const [users, setUsers] = useState([]); // [{uid, nickname}]
   const [message, setMessage] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]); // UIDs
   const [sendToAll, setSendToAll] = useState(false);
 
   useEffect(() => {
     const usersRef = ref(db, 'users');
     const unsub = onValue(usersRef, (snapshot) => {
       const data = snapshot.val() || {};
-      setUsers(Object.keys(data));
+      const list = Object.entries(data).map(([userUid, val]) => ({
+        uid: userUid,
+        nickname: val.nickname || userUid,
+      }));
+      setUsers(list);
     });
     return () => unsub();
   }, []);
 
-  const handleToggleUser = (user) => {
+  const handleToggleUser = (userUid) => {
     setSelectedUsers((prev) =>
-      prev.includes(user) ? prev.filter((u) => u !== user) : [...prev, user]
+      prev.includes(userUid) ? prev.filter((u) => u !== userUid) : [...prev, userUid]
     );
   };
 
@@ -28,8 +32,8 @@ function SendNotification({ nickname }) {
     e.preventDefault();
     if (!message.trim()) return;
 
-    const targets = sendToAll ? users : selectedUsers;
-    if (targets.length === 0) return;
+    const targetUids = sendToAll ? users.map((u) => u.uid) : selectedUsers;
+    if (targetUids.length === 0) return;
 
     const notif = {
       message: message.trim(),
@@ -38,8 +42,8 @@ function SendNotification({ nickname }) {
       read: false,
     };
 
-    targets.forEach((user) => {
-      push(ref(db, `notifications/${user}`), notif);
+    targetUids.forEach((userUid) => {
+      push(ref(db, `notifications/${userUid}`), notif);
     });
 
     setMessage('');
@@ -67,14 +71,14 @@ function SendNotification({ nickname }) {
         </label>
         {!sendToAll && (
           <div className="send-notif-users">
-            {users.map((user) => (
-              <label key={user}>
+            {users.map((u) => (
+              <label key={u.uid}>
                 <input
                   type="checkbox"
-                  checked={selectedUsers.includes(user)}
-                  onChange={() => handleToggleUser(user)}
+                  checked={selectedUsers.includes(u.uid)}
+                  onChange={() => handleToggleUser(u.uid)}
                 />
-                {user}
+                {u.nickname}
               </label>
             ))}
           </div>

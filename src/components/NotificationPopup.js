@@ -3,9 +3,9 @@ import { ref, update } from 'firebase/database';
 import { db } from '../firebase';
 import './NotificationPopup.css';
 
-function NotificationPopup({ nickname, notifications, onClose }) {
+function NotificationPopup({ uid, notifications, onClose }) {
   const handleMarkRead = (notifId) => {
-    update(ref(db, `notifications/${nickname}/${notifId}`), { read: true });
+    update(ref(db, `notifications/${uid}/${notifId}`), { read: true });
   };
 
   const formatDate = (ts) => {

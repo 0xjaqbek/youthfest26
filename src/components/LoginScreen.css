@@ -1,0 +1,89 @@
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c3e50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.login-modal h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.login-modal p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.login-btn:hover:not(:disabled) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-color: #999;
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-btn.google {
+  color: #333;
+}
+
+.login-btn.apple {
+  background: #000;
+  color: white;
+  border-color: #000;
+}
+
+.login-btn.apple:hover:not(:disabled) {
+  background: #222;
+  border-color: #222;
+}
+
+.login-error {
+  color: #e74c3c;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-loading {
+  color: #3498db;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}

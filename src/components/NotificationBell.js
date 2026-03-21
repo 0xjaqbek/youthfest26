@@ -4,13 +4,13 @@ import { db } from '../firebase';
 import NotificationPopup from './NotificationPopup';
 import './NotificationBell.css';
 
-function NotificationBell({ nickname }) {
+function NotificationBell({ uid }) {
   const [notifications, setNotifications] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    if (!nickname) return;
-    const notifRef = ref(db, `notifications/${nickname}`);
+    if (!uid) return;
+    const notifRef = ref(db, `notifications/${uid}`);
     const unsub = onValue(notifRef, (snapshot) => {
       const data = snapshot.val() || {};
       const list = Object.entries(data)
@@ -18,14 +18,13 @@ function NotificationBell({ nickname }) {
         .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
       setNotifications(list);
 
-      // Auto-show popup if there are unread notifications
       const hasUnread = list.some((n) => !n.read);
       if (hasUnread) {
         setShowPopup(true);
       }
     });
     return () => unsub();
-  }, [nickname]);
+  }, [uid]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -39,7 +38,7 @@ function NotificationBell({ nickname }) {
       </button>
       {showPopup && (
         <NotificationPopup
-          nickname={nickname}
+          uid={uid}
           notifications={notifications}
           onClose={() => setShowPopup(false)}
         />

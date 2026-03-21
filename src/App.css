@@ -64,3 +64,12 @@
   border-bottom: 2px solid #3498db;
   padding-bottom: 0.5rem;
 }
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 1.2rem;
+  color: #666;
+}

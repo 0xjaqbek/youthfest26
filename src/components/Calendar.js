@@ -19,7 +19,7 @@ function formatDate(year, month, day) {
   return `${year}-${m}-${d}`;
 }
 
-function Calendar({ nickname }) {
+function Calendar({ uid, nickname }) {
   const [currentMonth, setCurrentMonth] = useState(4); // May = index 4
   const [calendarData, setCalendarData] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
@@ -33,7 +33,7 @@ function Calendar({ nickname }) {
   }, []);
 
   const handleSave = (dateStr, entry) => {
-    set(ref(db, `calendar/${dateStr}/${nickname}`), entry);
+    set(ref(db, `calendar/${dateStr}/${uid}`), { ...entry, nickname });
     setSelectedDate(null);
   };
 
@@ -79,11 +79,11 @@ function Calendar({ nickname }) {
         >
           <div className="day-number">{day}</div>
           <div className="day-dots">
-            {entries.slice(0, maxDots).map(([user, entry]) => {
+            {entries.slice(0, maxDots).map(([entryUid, entry]) => {
               const status = typeof entry === 'object' ? entry.status : entry;
               const cls = status === 'pasuje' ? 'pasuje' :
                           status === 'nie pasuje' ? 'nie-pasuje' : 'inne';
-              return <div key={user} className={`day-dot ${cls}`} title={user} />;
+              return <div key={entryUid} className={`day-dot ${cls}`} title={entry.nickname || entryUid} />;
             })}
             {entries.length > maxDots && (
               <span className="day-overflow">+{entries.length - maxDots}</span>
@@ -100,7 +100,7 @@ function Calendar({ nickname }) {
   const canGoNext = currentMonth < 9;
 
   const currentStatus = selectedDate
-    ? calendarData[selectedDate]?.[nickname] || null
+    ? calendarData[selectedDate]?.[uid] || null
     : null;
 
   return (
@@ -132,13 +132,13 @@ function Calendar({ nickname }) {
       {selectedDate && calendarData[selectedDate] && (
         <div className="date-summary">
           <h4>Wpisy na {selectedDate}:</h4>
-          {Object.entries(calendarData[selectedDate]).map(([user, entry]) => {
+          {Object.entries(calendarData[selectedDate]).map(([entryUid, entry]) => {
             const status = entry.status || entry;
             const cls = status === 'pasuje' ? 'pasuje' :
                         status === 'nie pasuje' ? 'nie-pasuje' : 'inne';
             return (
-              <div key={user} className="date-summary-item">
-                <strong>{user}</strong>
+              <div key={entryUid} className="date-summary-item">
+                <strong>{entry.nickname || entryUid}</strong>
                 <span className={`status-badge ${cls}`}>{status}</span>
                 {entry.eventName && <span>— {entry.eventName}</span>}
               </div>
