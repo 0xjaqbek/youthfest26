@@ -1,0 +1,143 @@
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-nav button {
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.calendar-nav button:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.calendar-nav button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.calendar-nav .month-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-grid .day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem;
+  background: #ecf0f1;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.calendar-grid .day-cell {
+  min-height: 60px;
+  border: 1px solid #ecf0f1;
+  padding: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s;
+}
+
+.calendar-grid .day-cell:hover {
+  background: #eaf2f8;
+}
+
+.calendar-grid .day-cell.empty {
+  cursor: default;
+  background: transparent;
+  border: none;
+}
+
+.calendar-grid .day-cell.empty:hover {
+  background: transparent;
+}
+
+.day-number {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.day-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.day-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.day-dot.pasuje {
+  background: #27ae60;
+}
+
+.day-dot.nie-pasuje {
+  background: #e74c3c;
+}
+
+.day-dot.inne {
+  background: #f39c12;
+}
+
+.day-overflow {
+  font-size: 0.65rem;
+  color: #999;
+}
+
+.date-summary {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.date-summary h4 {
+  margin-bottom: 0.5rem;
+}
+
+.date-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.date-summary-item .status-badge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.75rem;
+}
+
+.status-badge.pasuje {
+  background: #27ae60;
+}
+
+.status-badge.nie-pasuje {
+  background: #e74c3c;
+}
+
+.status-badge.inne {
+  background: #f39c12;
+}

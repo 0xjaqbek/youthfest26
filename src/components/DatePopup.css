@@ -1,0 +1,101 @@
+.date-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+}
+
+.date-popup {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 350px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.date-popup h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.date-popup-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.date-popup-options button {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.date-popup-options button:hover {
+  border-color: #3498db;
+}
+
+.date-popup-options button.pasuje {
+  border-color: #27ae60;
+  color: #27ae60;
+}
+
+.date-popup-options button.pasuje:hover {
+  background: #27ae60;
+  color: white;
+}
+
+.date-popup-options button.nie-pasuje {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.date-popup-options button.nie-pasuje:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.date-popup-options button.inne {
+  border-color: #f39c12;
+  color: #f39c12;
+}
+
+.date-popup-options button.inne:hover {
+  background: #f39c12;
+  color: white;
+}
+
+.event-name-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #f39c12;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  outline: none;
+}
+
+.date-popup .cancel-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: #ecf0f1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+}
+
+.date-popup .cancel-btn:hover {
+  background: #ddd;
+}
