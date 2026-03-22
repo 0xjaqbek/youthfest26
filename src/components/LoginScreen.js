@@ -1,21 +1,49 @@
 import React, { useState } from 'react';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider, appleProvider } from '../firebase';
+import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase';
 import './LoginScreen.css';
 
 function LoginScreen() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isRegister, setIsRegister] = useState(false);
 
-  const handleLogin = async (provider) => {
+  const handleGoogleLogin = async () => {
     setError('');
     setLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, googleProvider);
     } catch (err) {
       if (err.code !== 'auth/popup-closed-by-user') {
-        setError('Błąd logowania. Spróbuj ponownie.');
+        setError('Błąd logowania przez Google. Spróbuj ponownie.');
       }
+      setLoading(false);
+    }
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!email.trim() || !password) return;
+    setError('');
+    setLoading(true);
+    try {
+      if (isRegister) {
+        await createUserWithEmailAndPassword(auth, email.trim(), password);
+      } else {
+        await signInWithEmailAndPassword(auth, email.trim(), password);
+      }
+    } catch (err) {
+      const messages = {
+        'auth/invalid-email': 'Nieprawidłowy adres email.',
+        'auth/user-not-found': 'Nie znaleziono konta z tym adresem email.',
+        'auth/wrong-password': 'Nieprawidłowe hasło.',
+        'auth/invalid-credential': 'Nieprawidłowy email lub hasło.',
+        'auth/email-already-in-use': 'Konto z tym adresem email już istnieje.',
+        'auth/weak-password': 'Hasło musi mieć minimum 6 znaków.',
+      };
+      setError(messages[err.code] || 'Błąd logowania. Spróbuj ponownie.');
       setLoading(false);
     }
   };
@@ -28,7 +56,7 @@ function LoginScreen() {
         <div className="login-buttons">
           <button
             className="login-btn google"
-            onClick={() => handleLogin(googleProvider)}
+            onClick={handleGoogleLogin}
             disabled={loading}
           >
             <svg viewBox="0 0 24 24" width="20" height="20">
@@ -39,17 +67,39 @@ function LoginScreen() {
             </svg>
             Zaloguj przez Google
           </button>
-          <button
-            className="login-btn apple"
-            onClick={() => handleLogin(appleProvider)}
-            disabled={loading}
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              <path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-            </svg>
-            Zaloguj przez Apple
-          </button>
         </div>
+
+        <div className="login-divider">
+          <span>lub</span>
+        </div>
+
+        <form className="login-email-form" onSubmit={handleEmailSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+          />
+          <input
+            type="password"
+            placeholder="Hasło (min. 6 znaków)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+          />
+          <button type="submit" className="login-btn email" disabled={loading || !email.trim() || !password}>
+            {isRegister ? 'Zarejestruj się' : 'Zaloguj się'}
+          </button>
+        </form>
+
+        <button
+          className="login-toggle"
+          onClick={() => { setIsRegister(!isRegister); setError(''); }}
+        >
+          {isRegister ? 'Masz już konto? Zaloguj się' : 'Nie masz konta? Zarejestruj się'}
+        </button>
+
         {error && <p className="login-error">{error}</p>}
         {loading && <p className="login-loading">Logowanie...</p>}
       </div>
